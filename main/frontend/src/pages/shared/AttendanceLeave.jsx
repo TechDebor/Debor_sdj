@@ -37,7 +37,8 @@ export default function AttendanceLeave() {
   }, [leaves, leaveRoleFilter, leaveStatusFilter, leaveSearch]);
 
   const handleUpdateLeaveStatus = (leaveId, status) => {
-    if (!window.confirm(`Are you sure you want to ${status.toLowerCase()} this leave request?`)) return;
+    const action = status === 'Approved' ? 'approve' : 'reject';
+    if (!window.confirm(`Are you sure you want to ${action} this leave request?`)) return;
     setIsUpdatingLeave(true);
     leaveService.update(leaveId, { status })
       .then(() => {
